@@ -1,0 +1,80 @@
+body ,html{
+ 
+    font-family:'Barlow Condensed', sans-serif;
+  }
+  a{
+     text-decoration:none;
+     color:white;
+     
+  }
+  
+  a:hover{
+    color:grey;
+  }
+  .heading
+ {
+      text-align:center;
+      padding:6rem 0;
+      padding-bottom:3rem;
+      font-size:2.5rem;
+      color:black;
+      margin-bottom:0px;
+ }
+ .heading span{
+      background-color:green;
+    color:white;
+    display:inline-block;
+    padding:.5rem 3rem;
+    clip-path:polygon(100% 0,93% 50%,100% 99%,0% 100%,7% 50%,0% 0%);
+ }
+ 
+ .feature_section .feature-box{
+  background-color:transparent;
+  border:0.15rem solid rgb(240, 233, 233);
+  transition:all 0.3s;
+}
+
+.feature_section .feature-icon-border{
+  background-color:transparent;
+  border-radius:50%;
+  border:0.2rem solid #c9e9c4;
+  padding:0.5rem;
+  display:inline-block;
+  margin-top:35px;
+  
+}
+.feature_section .feature-box .feature-icon{
+height:60px;
+width:60px;
+ margin:auto;
+ align-items:center;
+ justify-content:center;
+ display:flex;
+ border-radius:50%;
+ background-color:#e2f6de;
+ 
+}
+.feature-box h3{
+  margin-top:1.3rem;
+  margin-bottom:1.9rem;
+  color:#061738;
+  font-weight:550;
+}
+.feature_section .feature-box :hover{
+   background-color: #061738;
+    border-color:#061738;
+   
+}
+.feature_section .feature-box :hover h3{
+  color: white;
+ 
+}
+
+.feature_section .feature-box:hover .feature-icon-border {
+  border-color: rgb(37, 121, 37);
+ 
+}
+
+
+
+ 

@@ -1,0 +1,59 @@
+body ,html{
+ 
+    font-family:'Barlow Condensed', sans-serif;
+  }
+  a{
+     text-decoration:none;
+     color:white;
+     
+  }
+  
+  a:hover{
+    color:grey;
+  }
+  .button{
+    text-decoration:none;
+    outline:0;
+  }
+  button:hover{
+    transition:all 0.6s ease-in;
+    -o-transition:all 0.6s ease-in;
+    -moz-transition:all 0.6s ease-in;
+    -webkit-transition:all 0.6s ease-in;
+  }
+
+  .category-box{
+    background-color:transparent;
+    border:0.15rem solid rgb(207, 200, 200);
+    transition:all 0.3s;
+     border-radius:10px;
+     padding:7rem 0;
+     padding-left:2rem;
+  }
+  
+  .category-box1{
+    background:url("../assets/frt1.jpg");
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover;
+   
+  }
+  .category-box2{
+    background:url("../assets/vegebg.jpg");
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover;
+  
+  }
+  .category-button{
+   
+       background-color: #0f6012;
+       box-shadow:5px 5px 25px rgb(94, 91, 91);
+       border:none;
+       padding:15px;
+       font-size:18px;
+  }
+  
+  
+  
+  
