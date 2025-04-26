@@ -1,0 +1,62 @@
+body ,html{
+ 
+    font-family:'Barlow Condensed', sans-serif;
+  }
+  a{
+     text-decoration:none;
+     color:white;
+     
+  }
+  
+  a:hover{
+    color:grey;
+  }
+  .button{
+    text-decoration:none;
+    outline:0;
+  }
+  button:hover{
+    transition:all 0.6s ease-in;
+    -o-transition:all 0.6s ease-in;
+    -moz-transition:all 0.6s ease-in;
+    -webkit-transition:all 0.6s ease-in;
+  }
+  .main-btn{
+    position:relative;
+    color:rgb(255, 255, 255);
+    background:linear-gradient(to right,#0f7404,#5cb917);
+    z-index:1;
+    overflow:hidden;
+    border:0.2rem solid white;
+    border-radius:3.5rem;
+    padding:0.8rem 0.8rem;
+    font-size:1.2rem;
+    font-weight:600;
+    margin-right:20px;
+  }
+  .main-btn:hover{
+   background:white;
+    color:green;
+    border:0.19rem solid green;
+  
+  }
+  
+.landing_about_section{
+
+    padding:9rem 5rem;
+    margin-bottom:20px;
+      background:url("../assets/about-banner.jpg");
+      background-repeat: no-repeat;
+      background-position:center;
+      background-size:cover;
+      
+  }
+  .landing_about_section h2{
+  font-size:2.2rem;line-height:2.7rem;font-family:'Barlow Condensed',sans-serif;
+  color:#0d0149;font-weight:600;
+  }
+  .landing_about_section p {
+     color:#0d0149;;
+     margin-bottom:2rem;
+     font-size:16px;font-family:'Barlow Condensed',sans-serif;
+  }

@@ -1,0 +1,71 @@
+body ,html{
+ 
+    font-family:'Barlow Condensed', sans-serif;
+  }
+  a{
+     text-decoration:none;
+     color:white;
+     
+  }
+  
+  a:hover{
+    color:grey;
+  }
+  .button{
+    text-decoration:none;
+    outline:0;
+  }
+  button:hover{
+    transition:all 0.6s ease-in;
+    -o-transition:all 0.6s ease-in;
+    -moz-transition:all 0.6s ease-in;
+    -webkit-transition:all 0.6s ease-in;
+  }
+  .nav1{
+    background-image:url('../assets/bg.png');
+     background-repeat: no-repeat;
+     background-position:center;
+     background-size:cover;
+     
+   }
+.nav2{
+    background-color:#26732a;
+}
+
+.logo-text{
+    position:relative
+}
+
+.logo-image{
+    position:absolute; top:-10px;left:82px;
+}
+.cart-num{
+    position:absolute;left:20px;
+                        top:-8px;font-size:12px;font-weight:700;background-color:rgb(222, 5, 5);color:white; padding-left:6px; padding-right:6px;  border-radius:80px;}
+
+#changeButton{
+    background:none;border:none;color:white;
+}
+
+
+.header_right span
+{
+   color:green;
+   font-size:13.5px;
+   font-weight:600;
+}
+.header_right .phone_no
+{
+   color:white;
+   
+}
+
+ #locationText:hover
+ {
+    color:#30a534
+ }
+ #locationText
+ {
+   font-size:14.5px;
+
+ }
