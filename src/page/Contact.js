@@ -162,7 +162,7 @@ const Contact = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="./card">
                   Products
                 </a>
               </li>

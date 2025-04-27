@@ -1,67 +1,182 @@
-import logo from '../assets/iconcontact.png';
+import React, { useState } from 'react';
+import './Login.css'; // Ensure your CSS file is correctly linked
 
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
 
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-function Login() {
+  // Handle input changes
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+
+    // Clear error when user starts typing
+    if (formErrors[name]) {
+      setFormErrors({
+        ...formErrors,
+        [name]: '',
+      });
+    }
+  };
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // Validate form
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    // Email validation
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Email address is invalid';
+      isValid = false;
+    }
+
+    // Password validation
+    if (!formData.password) {
+      errors.password = 'Password is required';
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      setIsSubmitting(true);
+
+      // Simulate API call
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+
+        // Reset success state after showing success animation
+        setTimeout(() => {
+          setIsSuccess(false);
+          console.log('Login successful!', formData);
+        }, 2000);
+      }, 1500);
+    } else {
+      // Add shake animation to form on error
+      const form = document.querySelector('.login-form');
+      form.classList.add('shake');
+      setTimeout(() => {
+        form.classList.remove('shake');
+      }, 600);
+    }
+  };
+
   return (
-  
-<>
-  <title>Orgo mart</title>
-  <style
-    dangerouslySetInnerHTML={{
-      __html:
-        '\n    body {\n      font-family: Arial, sans-serif;\n      margin: 0;\n      padding: 0;\n    }\n    header {\n      background-color: #33a532;\n      padding: 0;\n      color: #fff;\n    }\n    h1 {\n      margin: 0;\n      font-size: 32px;\n    }\n    nav {\n      background-color: #f5f5f5;\n      padding: 10px;\n    }\n    nav ul {\n      list-style-type: none;\n      margin: 0;\n      padding: 0;\n    }\n    nav ul li {\n      display: inline;\n      margin-right: 10px;\n    }\n    nav ul li a {\n      color: #333;\n      text-decoration: none;\n      padding: 5px;\n    }\n    section {\n      padding: 20px;\n    }\n    \n    .login-form {\n      max-width: 350px;\n      margin: 20px auto;\n      padding: 20px;\n      background-color: #f5f5f5;\n      border: 1px solid #ccc;\n      display: flex;\n      justify-content: center;\n      margin-top: 50px;\n      background-image: url(login1.jpg);\n      background-size: contain;\n      border-radius: 65px;\n     color: white;\n    \n    }\n    .login-form input[type="text"],\n    .login-form input[type="password"] {\n      width: 100%;\n      padding: 10px;\n      margin-bottom: 10px;\n      border: 1px solid #ccc;\n    }\n    .login-form input[type="submit"] {\n      width: 100%;\n      padding: 10px;\n      background-color: #33a532;\n      border: none;\n      color: #fff;\n      cursor: pointer;\n    }\n\n  .heading{\n     text-align: center;\n     color: white;\n  }\n  p{\n    text-align: center;\n  }\n  a{\n    text-align: center;\n  }\n\n  .icon{\n    margin-top: 10px;\n  }\n  '
-    }}
-  />
-  
- 
-  
-  <div className="login-form">
-    <form
-      style={{ marginRight: 21 }}
-      action="#"
-      method="post"
-      name="login"
-      onsubmit="return validateForm()"
-    >
-      <h2 className="heading">Welcome to Green Grocer</h2>
-      <br />
-      <h2 className="heading">Login</h2>
-      <label htmlFor="username">Username</label>
-      <input type="text" name="username" placeholder="Email id" required="" />
-      <br />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        required=""
-      />
-      <br />
-      <div style={{ marginLeft: 25 }}>
-        <input type="submit" defaultValue="Sign in" />
-      </div>
-      <p>or</p>
-      <div className="icon">
-        <h2 className="heading">
-          <a href="#">
-            <img
-              style={{ height: 20, width: 30, marginTop: 20 }}
-              src="google.jpg"
+    <div className="login-container">
+      <div className={`login-form ${isSuccess ? 'success-pulse' : ''}`}>
+        <form onSubmit={handleSubmit}>
+          <h2 className="heading">Welcome to OrgoMart</h2>
+          <div className="logo-container">
+            <i className="fas fa-seedling fa-2x"></i>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <div className="input-wrapper">
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                className={formErrors.email ? 'error' : formData.email ? 'valid' : ''}
+              />
+              <i className="input-icon fas fa-envelope"></i>
+            </div>
+            {formErrors.email && <div className="error-message" style={{ display: 'block' }}>{formErrors.email}</div>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <div className="input-wrapper">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                value={formData.password}
+                onChange={handleChange}
+                className={formErrors.password ? 'error' : formData.password ? 'valid' : ''}
+              />
+              <i
+                className={`input-icon password-toggle fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}
+                onClick={togglePasswordVisibility}
+              ></i>
+            </div>
+            {formErrors.password && <div className="error-message" style={{ display: 'block' }}>{formErrors.password}</div>}
+          </div>
+
+          <div className="remember-me">
+            <input
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
+              checked={formData.rememberMe}
+              onChange={handleChange}
             />
-          </a>
-         <p> Sign in with Google</p>
-        </h2>
+            <label htmlFor="rememberMe">
+              <span className="checkbox-custom"></span>
+              Remember me
+            </label>
+            <a href="#" className="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button
+            type="submit"
+            className={`submit-btn ${isSubmitting ? 'loading' : ''} ${isSuccess ? 'success' : ''}`}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? '' : isSuccess ? 'Success!' : 'Sign In'}
+          </button>
+
+          <div className="divider">or continue with</div>
+
+          <div className="social-login">
+            <button type="button" className="social-btn google-btn">
+              <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google" />
+            </button>
+            <button type="button" className="social-btn facebook-btn">
+              <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Facebook" />
+            </button>
+          </div>
+
+          <p>
+            New to OrgoMart? <a href="/signup">Create Account</a>
+          </p>
+        </form>
       </div>
-      <p>New to Green Grocer?</p>
-      <p>
-        <a href="createacc.html">Create Account</a>
-      </p>
-    </form>
-  </div>
-</>
-   
-);
-}
+    </div>
+  );
+};
 
 export default Login;

@@ -17,14 +17,15 @@ root.render(
 reportWebVitals();
 */
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-   ReactDOM.render(
-   
+// Use the newer createRoot API for React 18
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
     <App />
-   
-   
-   ,document.getElementById('root'));
-  
+  </React.StrictMode>
+);

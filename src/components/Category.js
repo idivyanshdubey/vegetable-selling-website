@@ -18,7 +18,7 @@ function Category(){
                   <p style={{color: '#0f6012', fontSize: 20}}>
                     Looking for fresh meals , have fruits !!
                   </p>
-                  <button className="button btn category-button"><a href="#">Go to category &gt;</a></button>
+                  <button className="button btn category-button"><a href="/card">Go to category {'>'}</a></button>
                 </div>
               </div>
             </div>
@@ -27,7 +27,7 @@ function Category(){
                 <div className="text-left ml-lg-2">
                   <h1 style={{color: '#0f6012', fontWeight: 700}}>Vegetables</h1>
                   <p style={{color: '#0f6012', fontSize: 20}}>Veges are perfectly healthy for you.</p>
-                  <button className="button btn category-button"><a href="#">Go to category &gt;</a></button>
+                  <button className="button btn category-button"><a href="/card">Go to category {'>'}</a></button>
                 </div>
               </div>
             </div>
@@ -37,6 +37,6 @@ function Category(){
     </div></div>
   );
  
-  }
-  export default Category;
+
+  }  export default Category;
 
