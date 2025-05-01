@@ -1,59 +1,217 @@
-body ,html{
- 
-    font-family:'Barlow Condensed', sans-serif;
-  }
-  a{
-     text-decoration:none;
-     color:white;
-     
-  }
-  
-  a:hover{
-    color:grey;
-  }
-  .button{
-    text-decoration:none;
-    outline:0;
-  }
-  button:hover{
-    transition:all 0.6s ease-in;
-    -o-transition:all 0.6s ease-in;
-    -moz-transition:all 0.6s ease-in;
-    -webkit-transition:all 0.6s ease-in;
-  }
+/* Base styles */
+body, html {
+  font-family: 'Barlow Condensed', sans-serif;
+  margin: 0;
+  padding: 0;
+  --primary-color: #0f6012;
+  --hover-color: #54df25;
+  --text-color: #0f6012;
+  --box-shadow: 0 10px 30px rgba(15, 96, 18, 0.15);
+  --hover-shadow: 0 15px 35px rgba(15, 96, 18, 0.3);
+  --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-  .category-box{
-    background-color:transparent;
-    border:0.15rem solid rgb(207, 200, 200);
-    transition:all 0.3s;
-     border-radius:10px;
-     padding:7rem 0;
-     padding-left:2rem;
+/* Link styles */
+a {
+  text-decoration: none;
+  color: white;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+/* Button base styles */
+.button {
+  text-decoration: none;
+  outline: 0;
+}
+
+button:hover {
+  transition: all 0.6s ease-in;
+  -o-transition: all 0.6s ease-in;
+  -moz-transition: all 0.6s ease-in;
+  -webkit-transition: all 0.6s ease-in;
+}
+
+/* Category section styles */
+.category_section {
+  padding: 3rem 0;
+}
+
+/* Category box base styles */
+.category-box {
+  background-color: transparent;
+  border: 0.15rem solid rgba(207, 200, 200, 0.5);
+  transition: all 0.5s ease;
+  border-radius: 15px;
+  padding: 7rem 0;
+  padding-left: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  height: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.category-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.7) 40%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  z-index: 1;
+}
+
+.category-box .text-left {
+  position: relative;
+  z-index: 2;
+  max-width: 70%;
+}
+
+.category-box:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--hover-shadow);
+  border-color: var(--primary-color);
+}
+
+/* Specific background images */
+.category-box1 {
+  background: url("../assets/frt1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.category-box2 {
+  background: url("../assets/vegebg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Category heading styles */
+.category-box h1 {
+  color: var(--text-color);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.category-box h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.category-box:hover h1::after {
+  width: 100%;
+}
+
+/* Category paragraph styles */
+.category-box p {
+  color: var(--text-color);
+  font-size: 20px;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.category-box:hover p {
+  transform: translateX(5px);
+}
+
+/* Category button styles */
+.category-button {
+  background-color: var(--primary-color);
+  box-shadow: 5px 5px 25px rgb(94, 91, 91);
+  border: none;
+  padding: 15px 25px;
+  font-size: 18px;
+  color: white;
+  border-radius: 50px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.category-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: var(--hover-color);
+  transition: all 0.4s ease;
+  z-index: -1;
+}
+
+.category-button:hover {
+  background-color: var(--hover-color); /* Change background to hover color */
+  color: white; /* Keep text white */
+  transform: translateY(-3px); /* Slight upward movement */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+.category-button:hover::before {
+  width: 100%;
+}
+
+/* Arrow animation for button */
+.category-button::after {
+  content: '>';
+  margin-left: 5px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.category-button:hover::after {
+  transform: translateX(5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .category-box {
+    padding: 5rem 0;
+    padding-left: 1.5rem;
+    height: 250px;
   }
   
-  .category-box1{
-    background:url("../assets/frt1.jpg");
-    background-repeat: no-repeat;
-    background-position:center;
-    background-size:cover;
-   
+  .category-box .text-left {
+    max-width: 90%;
   }
-  .category-box2{
-    background:url("../assets/vegebg.jpg");
-    background-repeat: no-repeat;
-    background-position:center;
-    background-size:cover;
-  
-  }
-  .category-button{
-   
-       background-color: #0f6012;
-       box-shadow:5px 5px 25px rgb(94, 91, 91);
-       border:none;
-       padding:15px;
-       font-size:18px;
+}
+
+@media (max-width: 576px) {
+  .category-box h1 {
+    font-size: 1.8rem;
   }
   
+  .category-box p {
+    font-size: 16px;
+  }
   
-  
-  
+  .category-button {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}

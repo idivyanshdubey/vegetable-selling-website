@@ -1,80 +1,187 @@
-body ,html{
- 
-    font-family:'Barlow Condensed', sans-serif;
-  }
-  a{
-     text-decoration:none;
-     color:white;
-     
-  }
-  
-  a:hover{
-    color:grey;
-  }
-  .heading
- {
-      text-align:center;
-      padding:6rem 0;
-      padding-bottom:3rem;
-      font-size:2.5rem;
-      color:black;
-      margin-bottom:0px;
- }
- .heading span{
-      background-color:green;
-    color:white;
-    display:inline-block;
-    padding:.5rem 3rem;
-    clip-path:polygon(100% 0,93% 50%,100% 99%,0% 100%,7% 50%,0% 0%);
- }
- 
- .feature_section .feature-box{
-  background-color:transparent;
-  border:0.15rem solid rgb(240, 233, 233);
-  transition:all 0.3s;
+/* Base styles */
+body, html {
+  font-family: 'Barlow Condensed', sans-serif;
 }
 
-.feature_section .feature-icon-border{
-  background-color:transparent;
-  border-radius:50%;
-  border:0.2rem solid #c9e9c4;
-  padding:0.5rem;
-  display:inline-block;
-  margin-top:35px;
-  
-}
-.feature_section .feature-box .feature-icon{
-height:60px;
-width:60px;
- margin:auto;
- align-items:center;
- justify-content:center;
- display:flex;
- border-radius:50%;
- background-color:#e2f6de;
- 
-}
-.feature-box h3{
-  margin-top:1.3rem;
-  margin-bottom:1.9rem;
-  color:#061738;
-  font-weight:550;
-}
-.feature_section .feature-box :hover{
-   background-color: #061738;
-    border-color:#061738;
-   
-}
-.feature_section .feature-box :hover h3{
+a {
+  text-decoration: none;
   color: white;
- 
+}
+
+a:hover {
+  color: #c8e6c9;
+}
+
+/* Modern heading style with polygon clip path */
+.heading {
+  text-align: center;
+  padding: 6rem 0;
+  padding-bottom: 3rem;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 0px;
+  position: relative;
+}
+
+.heading span {
+  background: linear-gradient(135deg, #4caf50, #388e3c);
+  color: white;
+  display: inline-block;
+  padding: .5rem 3rem;
+  clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.heading span:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Feature section styling */
+.feature_section {
+  padding: 50px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+}
+
+.feature_section .feature-box {
+  background-color: white;
+  border: 0.15rem solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.feature_section .feature-icon-border {
+  background-color: transparent;
+  border-radius: 50%;
+  border: 0.2rem solid #c8e6c9;
+  padding: 0.5rem;
+  display: inline-block;
+  margin-top: 35px;
+  transition: all 0.3s ease;
+}
+
+.feature_section .feature-box .feature-icon {
+  height: 60px;
+  width: 60px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 50%;
+  background-color: #e2f6de;
+  color: #4caf50;
+  font-size: 24px;
+  transition: all 0.3s ease;
+}
+
+.feature-box h3 {
+  margin-top: 1.3rem;
+  margin-bottom: 1.9rem;
+  color: #333;
+  font-weight: 550;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.feature-box h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background-color: #4caf50;
+  transition: width 0.3s ease;
+}
+
+.feature-box p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Hover effects */
+.feature_section .feature-box:hover {
+  transform: translateY(-10px);
+  border-color: #4caf50;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .feature_section .feature-box:hover .feature-icon-border {
-  border-color: rgb(37, 121, 37);
- 
+  border-color: #4caf50;
+  transform: rotate(45deg);
 }
 
+.feature_section .feature-box:hover .feature-icon {
+  background-color: #4caf50;
+  color: white;
+  transform: rotate(-45deg);
+}
 
+.feature_section .feature-box:hover h3 {
+  color: #388e3c;
+}
 
- 
+.feature_section .feature-box:hover h3::after {
+  width: 60px;
+  background-color: #388e3c;
+}
+
+/* Add subtle animation for feature boxes */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.feature_section .feature-box:hover .feature-icon {
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+    padding: 4rem 0;
+    padding-bottom: 2rem;
+  }
+  
+  .heading span {
+    padding: .4rem 2rem;
+  }
+  
+  .feature_section .feature-box {
+    padding: 20px 15px;
+  }
+  
+  .feature_section .feature-icon-border {
+    margin-top: 25px;
+  }
+  
+  .feature-box h3 {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .heading {
+    font-size: 1.8rem;
+  }
+  
+  .heading span {
+    padding: .3rem 1.5rem;
+  }
+}
