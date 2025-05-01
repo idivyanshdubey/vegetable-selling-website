@@ -176,8 +176,8 @@ const About = () => {
                 <div className="about-details">
                   <p className="fw-bold">Our prime motive is to make our customers satisfied with our service.</p>
                   <p>
-                    Organic is a low-cost online general store that gets items across categories like grocery, natural products and vegetables,
-                    beauty and health, household care, baby care, pet care, and meats and fish delivered to your doorstep. Our goal is to give our clients the best shopping experience in terms of service, range, and value.
+                    OrgoMart is a low-cost online general store that gets items across categories like grocery, natural products and vegetables,
+                    beauty and health, household care, baby care, pet care, meats and fish delivered to your doorstep. Our goal is to give our clients the best shopping experience in terms of service, range, and value.
                   </p>
                   <p>
                     From fresh Fruits and Vegetables, rice and lentils, spices and seasonings to packaged items, beverages, personal care products—we have everything.
@@ -197,7 +197,7 @@ const About = () => {
           <p className="lead">We are passionate about providing fresh and healthy produce to our customers.</p>
           <div className="hero-cta mt-4">
             <a href="./card" className="btn btn-success me-3">Shop Now</a>
-            <a href="#contact" className="btn btn-outline-success">Contact Us</a>
+            <a href="/contact" className="btn btn-outline-success">Contact Us</a>
           </div>
         </div>
       </section>
@@ -391,8 +391,8 @@ const About = () => {
               <div className="contact-info">
                 <div>
                   <p>Contact us at:</p>
-                  <p>Email: support@orgomart.com</p>
-                  <p>Phone: +1 234 567 890</p>
+                  <p>Email: Support@orgomart.com</p>
+                  <p>Phone: +91 1234567890</p>
                 </div>
               </div>
             </div>

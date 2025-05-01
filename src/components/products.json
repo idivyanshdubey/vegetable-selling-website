@@ -3,7 +3,7 @@
     {
         "id": "1",
         "title": "Carrots",
-        "url": "https://source.unsplash.com/ZgDHMMd72I8",
+        "image":"carrot.jpeg",
         "size": "Vegetables",
         "price": 60,
         "quantity": 0
@@ -12,7 +12,7 @@
     {
         "id": "2",
         "title": "Bananas",
-        "url": "https://source.unsplash.com/DkTuGvgPotA",
+        "image": "bannana.jpg",
         "size": "Fruits",
         "price": 50,
         "quantity": 0
@@ -21,7 +21,7 @@
     {
         "id": "3",
         "title": "Tomatoes",
-        "url": "https://source.unsplash.com/aIghKsc3H34",
+        "image": "tomato.png",
         "size": "Vegetables",
         "price": 80,
         "quantity": 0
@@ -29,7 +29,7 @@
     {
         "id": "4",
         "title": "Broccoli",
-        "url": "https://source.unsplash.com/Dof-Xo3bHEA",
+        "image": "brocoli.jpg",
         "size": "Vegetables",
         "price": 100,
         "quantity": 0
@@ -37,7 +37,7 @@
     {
         "id": "5",
         "title": "Capsicum",
-        "url": "https://source.unsplash.com/Er8w2PcHEXM",
+        "image": "capsicum.avif",
         "size": "Vegetables",
         "price": 60,
         "quantity": 0
@@ -45,7 +45,7 @@
     {
         "id": "6",
         "title": "Peas",
-        "url": "https://source.unsplash.com/bwKUJ3Y5JS4",
+        "image": "peas.jpg",
         "size": "Vegetables",
         "price": 90,
         "quantity": 0
@@ -53,7 +53,7 @@
     {
         "id": "7",
         "title": "Oranges",
-        "url": "https://source.unsplash.com/A4BBdJQu2co",
+        "image":"orange.jpg",
         "size": "Fruits",
         "price": 70,
         "quantity": 0
@@ -61,7 +61,7 @@
     {
         "id": "8",
         "title": "Papaya",
-        "url": "https://source.unsplash.com/2r9Azbo5drA",
+        "image": "papaya.jpg",
         "size": "Fruits",
         "price": 70,
         "quantity": 0
@@ -69,7 +69,7 @@
     {
         "id": "9",
         "title": "Strawberries",
-        "url": "https://source.unsplash.com/KVv5lFOMY1E",
+        "image": "strawberry.jpg",
         "size": "Fruits",
         "price": 120,
         "quantity": 0
@@ -77,7 +77,7 @@
     {
         "id": "10",
         "title": "Onions",
-        "url": "https://source.unsplash.com/KndjMD5rZu0",
+        "image": "onion.jpg",
         "size": "Vegetables",
         "price": 60,
         "quantity": 0
@@ -85,7 +85,7 @@
     {
         "id": "11",
         "title": "Kiwi",
-        "url": "https://source.unsplash.com/HkshRttZKCM",
+        "image": "kiwi.jpg",
         "size": "Fruits",
         "price": 200,
         "quantity": 0
@@ -93,7 +93,7 @@
     {
         "id": "12",
         "title": "Musk Melon",
-        "url": "https://source.unsplash.com/wf7jJIbMC-A",
+        "image": "product-1.jpg",
         "size": "Fruits",
         "price": 70,
         "quantity": 0
@@ -101,7 +101,7 @@
     {
         "id": "13",
         "title": "Potatoes",
-        "url": "https://source.unsplash.com/B0s3Xndk6tw",
+        "image": "potato.avif",
         "size": "Vegetables",
         "price": 40,
         "quantity": 0
@@ -109,7 +109,7 @@
     {
         "id": "14",
         "title": "Garlic",
-        "url": "https://source.unsplash.com/4LJYzvrxISI",
+        "image": "garlic.jpg",
         "size": "Vegetables",
         "price": 80,
         "quantity": 0
@@ -120,7 +120,7 @@
     {
         "id": "15",
         "title": "Grapes",
-        "url": "https://source.unsplash.com/l6sBLZr9mkQ",
+        "image": "grapes.jpg",
         "size": "Fruits",
         "price": 100,
         "quantity": 0
@@ -128,10 +128,29 @@
     {
         "id": "16",
         "title": "Pineapple",
-        "url": "https://source.unsplash.com/ZS_RypKo9sk",
+        "image": "pineapple.jpg",
+        "size": "Fruits",
+        "price": 120,
+        "quantity": 0
+    },
+
+    {
+        "id": "17",
+        "title": "Dragon Fruit",
+        "image": "product-4.jpg",
+        "size": "Fruits",
+        "price": 120,
+        "quantity": 0
+    },
+    {
+        "id": "17",
+        "title": "Apple",
+        "image": "product-3.jpg",
         "size": "Fruits",
         "price": 120,
         "quantity": 0
     }
+
+  
   
 ]
