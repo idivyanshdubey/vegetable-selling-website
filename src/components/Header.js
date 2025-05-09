@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import './Header.css';
 import Find from './Find.js';
 import HomeSlider from './HomeSlider';
 
 const Header = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const navigateToHome = () => {
+    navigate('/'); // Navigate to the homepage
+  };
+
   return (
     <div>
       {/* Top Navbar */}
@@ -26,7 +33,7 @@ const Header = () => {
           </div>
           <div className="header_right me-4">
             <div className="navbar-text">
-              <i className="fas fa-phone-alt" /> <span className="phone_no">+91 8126263458</span>
+              <i className="fas fa-phone-alt" /> <span className="phone_no">+91 8368959173</span>
             </div>
           </div>
         </div>
@@ -35,7 +42,7 @@ const Header = () => {
       {/* Main Navbar */}
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2" style={{ marginBottom: 0 }}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" onClick={navigateToHome} style={{ cursor: 'pointer' }}>
             <span className="logo-text">
               OrgoMart <i className="fas fa-seedling fa-sm logo-image" />
             </span>

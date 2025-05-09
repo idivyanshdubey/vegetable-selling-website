@@ -1,54 +1,99 @@
- import React from 'react';
-  const Footer=()=>{
+import React from 'react';
+import './Footer.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faTwitter, 
+  faFacebook, 
+  faInstagram, 
+  faLinkedin 
+} from '@fortawesome/free-brands-svg-icons';
+
+const Footer = () => {
   return (
-   
-  <footer className="ftco-footer ftco-section img" style={{backgroundColor: '#333', padding: 20, color: '#fff', textAlign: 'center'}}>
-    <div className="overlay" />
-    <div className="container">
-      <div className="row mb-4">
-        <div className="col-md-4">
-          <div className="ftco-footer-widget mb-4">
-            <h2 className="ftco-heading-2">About Us</h2>
-            <p>Our website aims at providing customers fruits and vegetables directly from vegetables markets . Sellers meet buyers through this platform .</p>
-            <ul className="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-              <li className="ftco-animate"><a href="#"><span className="icon-twitter" /></a></li>
-              <li className="ftco-animate"><a href="#"><span className="icon-facebook" /></a></li>
-              <li className="ftco-animate"><a href="#"><span className="icon-instagram" /></a></li>
-            </ul>
+    <footer className="ftco-footer ftco-section">
+      <div className="container">
+        {/* About Us Section */}
+        <div className="row mb-4">
+          <div className="col-md-4">
+            <div className="ftco-footer-widget mb-4">
+              <h2 className="ftco-heading-2">About Us</h2>
+              <p>
+                Our website connects customers with sellers, providing fresh fruits and vegetables
+                directly from local markets.
+              </p>
+              <div className="ftco-footer-social mt-4">
+                <a href="https://www.facebook.com/" aria-label="Facebook">
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+                <a href="https://x.com/" aria-label="Twitter">
+                  <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                <a href="https://www.instagram.com/" aria-label="Instagram">
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+                <a href="https://www.linkedin.com/in/divyansh-dubey-48101025d/" aria-label="LinkedIn">
+                  <FontAwesomeIcon icon={faLinkedin} />
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="ftco-footer-widget mb-4 ml-md-4">
-            <h2 className="ftco-heading-2">Site Links</h2>
-            <ul className="list-unstyled">
-              <li><a href="./aboutUs" className="py-2 d-block">About Us</a></li>
-              <li><a href="./contact" className="py-2 d-block">Feedback</a></li>
-              <li><a href="#" className="py-2 d-block">Products &amp; Prices</a></li>
-            </ul>
+          
+          {/* Site Links Section */}
+          <div className="col-md-4">
+            <div className="ftco-footer-widget mb-4">
+              <h2 className="ftco-heading-2">Site Links</h2>
+              <ul className="footer-links">
+                <li>
+                  <a href="./aboutUs">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="./contact">
+                    Feedback
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    Products &amp; Prices
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div className="col-md-4">
-          <div className="ftco-footer-widget mb-4">
-            <h2 className="ftco-heading-2">Have a Questions?</h2>
-            <div className="block-23 mb-3">
-              <ul>
-                <li><span className="icon icon-map-marker" /><span className="text">Dehradun , Uttarakhand , India</span></li>
-                <li><a href="#"><span className="icon icon-phone" /><span className="text">+91 8126263458</span></a></li>
-                <li><a href="#"><span className="icon icon-envelope" /><span className="text">malvikakunw1212@gmail.com</span></a></li>
+          
+          {/* Contact Section */}
+          <div className="col-md-4">
+            <div className="ftco-footer-widget mb-4">
+              <h2 className="ftco-heading-2">Have a Question?</h2>
+              <ul className="contact-info">
+                <li className="address">
+                  <span>Dehradun, Uttarakhand, India</span>
+                </li>
+                <li className="phone">
+                  <a href="tel:+918126263458">
+                    +91 8126263458
+                  </a>
+                </li>
+                <li className="email">
+                  <a href="mailto:divyanshhdubey10@gmail.com">
+                    divyanshhdubey10@gmail.com
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12 text-center">
-          © 2023 Vegetable Market. All rights reserved.
+        
+        {/* Footer Bottom Section */}
+        <div className="row">
+          <div className="col-md-12 text-center">
+            <p>© {new Date().getFullYear()} Vegetable Market. All rights reserved.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-
+    </footer>
   );
-  }
-  export default Footer;
+};
 
+export default Footer;

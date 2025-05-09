@@ -6,36 +6,37 @@ import quotes from '../assets/quotes.svg';
 
 function Testimonial() {
   const handlePrevClick = () => {
-    const prevButton = document.querySelector('#testimonialCarousel .carousel-control-prev');
-    if (prevButton) {
-      prevButton.click();
+    const carousel = document.querySelector('#testimonialCarousel');
+    if (carousel) {
+      const bootstrapCarousel = new window.bootstrap.Carousel(carousel);
+      bootstrapCarousel.prev(); // Move to the previous slide
     }
   };
 
   const handleNextClick = () => {
-    const nextButton = document.querySelector('#testimonialCarousel .carousel-control-next');
-    if (nextButton) {
-      nextButton.click();
+    const carousel = document.querySelector('#testimonialCarousel');
+    if (carousel) {
+      const bootstrapCarousel = new window.bootstrap.Carousel(carousel);
+      bootstrapCarousel.next(); // Move to the next slide
     }
   };
 
   return (
     <section className="testimonial_section">
       <div className="container">
+        {/* Section Title */}
         <div className="row justify-content-center">
-          <h2
-            className="section-title text-center mb-3 my-5"
-            style={{ color: 'rgb(2, 2, 100)', fontSize: '36px' }}
-          >
+          <h2 className="section-title text-center mb-3 my-5" style={{ color: 'rgb(2, 2, 100)', fontSize: '36px' }}>
             <b>Our Happy Customers</b>
           </h2>
           <div className="text-center pb-5" style={{ maxWidth: 400 }}>
             <p className="section-subtitle" style={{ color: 'rgb(2, 2, 100)' }}>
-              Always give people more than what they expect to get. The well-satisfied customer is
-              the well-satisfied we are as a team.
+              Always give people more than what they expect to get. A well-satisfied customer is the best reward for us.
             </p>
           </div>
         </div>
+
+        {/* Carousel */}
         <div className="row justify-content-center">
           <div className="col-xl-8 col-md-10">
             <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -68,9 +69,8 @@ function Testimonial() {
                     <div className="card col-sm-7">
                       <div className="desc-box">
                         <p className="fast-italic">
-                          Not only was customer support very fast, but the design is very
-                          professional. Will definitely look for new products in the future from
-                          this author.
+                          Not only was customer support very fast, but the design is very professional. Will definitely
+                          look for new products in the future from this author.
                         </p>
                         <div>
                           <h4>Customer 1</h4>
@@ -91,9 +91,7 @@ function Testimonial() {
                     <div className="card col-sm-7">
                       <div className="desc-box">
                         <p className="fast-italic">
-                          Not only was customer support very fast, but the design is very
-                          professional. Will definitely look for new products in the future from
-                          this author.
+                          The service was excellent, and the product quality exceeded my expectations. Highly recommend!
                         </p>
                         <div className="my-4">
                           <h4>Customer 2</h4>
@@ -105,26 +103,6 @@ function Testimonial() {
                   </div>
                 </div>
               </div>
-
-              {/* Carousel Controls */}
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#testimonialCarousel"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#testimonialCarousel"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Next</span>
-              </button>
 
               {/* Custom Navigation Buttons */}
               <div className="testimonial-nav-buttons">

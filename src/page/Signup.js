@@ -1,15 +1,116 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for routing
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.js';
 import icon from '../assets/contacticon3.png';
+import '../page/Signup.css';
 
 function Signup() {
+  // State for form inputs
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+
+  // State for error messages
+  const [errors, setErrors] = useState({});
+  
+  // State for form submission
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Handle input changes
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+    
+    // Clear error for this field when user starts typing
+    if (errors[id]) {
+      setErrors(prev => ({
+        ...prev,
+        [id]: ''
+      }));
+    }
+  };
+
+  // Validate form
+  const validateForm = () => {
+    const newErrors = {};
+    
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email address is invalid';
+    }
+    
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+    } else if (formData.password.length > 20) {
+      newErrors.password = 'Password must be less than 20 characters';
+    } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formData.password)) {
+      newErrors.password = 'Password must contain at least one letter and one number';
+    }
+    
+    // Confirm password validation
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (validateForm()) {
+      setIsSubmitting(true);
+      
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        console.log('Form submitted:', formData);
+        setSubmitSuccess(true);
+        
+        // Reset form after successful submission
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+          });
+          setSubmitSuccess(false);
+        }, 3000);
+      } catch (error) {
+        setErrors({ form: 'An error occurred. Please try again.' });
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
   return (
-    <div>
+    <div className="signup-page">
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <span className="logo-text">
               OrgoMart
               <span className="logo-image">
@@ -114,81 +215,154 @@ function Signup() {
       </nav>
 
       {/* Signup Form */}
-      <br />
-      <div
-        className="container"
-        style={{ maxWidth: '600px', backgroundColor: '#c6e9c6' }}
-      >
-        <div className="text-center pt-3 pb-0">
-          <img src={icon} alt="Signup Icon" />
-        </div>
-        <div className="container text-center pt-3">
-          <div className="pb-1">
-            Already have an account?{' '}
-            <Link to="/login" style={{ color: 'black' }}>
-              <b>&nbsp;Log In</b>
-            </Link>
+      <div className="signup-container">
+        <div className="signup-form-wrapper">
+          <div className="signup-header">
+            <img src={icon} alt="Signup Icon" className="signup-icon" />
+            <h2>Create Your Account</h2>
+            <p>Join OrgoMart for fresh organic products delivered to your doorstep</p>
           </div>
-        </div>
-        <form className="p-4">
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input type="text" className="form-control d-inline" id="name" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
+
+          {submitSuccess && (
+            <div className="alert alert-success" role="alert">
+              <i className="fas fa-check-circle"></i> Account created successfully!
             </div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-            />
-            <div id="passwordHelpBlock" className="form-text">
-              Your password must be 8-20 characters long, contain letters and
-              numbers, and must not contain spaces, special characters, or
-              emoji.
+          )}
+
+          {errors.form && (
+            <div className="alert alert-danger" role="alert">
+              <i className="fas fa-exclamation-circle"></i> {errors.form}
             </div>
-          </div>
-          <div className="text-center pt-2">
+          )}
+
+          <form className="signup-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="fas fa-user"></i>
+                </span>
+                <input
+                  type="text"
+                  className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                  id="name"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="fas fa-envelope"></i>
+                </span>
+                <input
+                  type="email"
+                  className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                  id="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+              <small className="form-text text-muted">
+                We'll never share your email with anyone else.
+              </small>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="fas fa-lock"></i>
+                </span>
+                <input
+                  type="password"
+                  className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                  id="password"
+                  placeholder="Create a password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+              <small className="form-text text-muted">
+                Password must be 8-20 characters long, contain letters and numbers.
+              </small>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="fas fa-lock"></i>
+                </span>
+                <input
+                  type="password"
+                  className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
+                  id="confirmPassword"
+                  placeholder="Confirm your password"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.confirmPassword && (
+                <div className="invalid-feedback">{errors.confirmPassword}</div>
+              )}
+            </div>
+
+            <div className="form-group">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="termsCheck"
+                  required
+                />
+                <label className="form-check-label" htmlFor="termsCheck">
+                  I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                </label>
+              </div>
+            </div>
+
             <button
               type="submit"
-              className="btn"
-              style={{
-                backgroundColor: 'rgb(44 125 48)',
-                color: 'white',
-                width: '200px',
-              }}
+              className="signup-btn"
+              disabled={isSubmitting}
             >
-              Sign Up
+              {isSubmitting ? (
+                <>
+                  <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Creating Account...
+                </>
+              ) : (
+                'Sign Up'
+              )}
             </button>
-          </div>
-          <div className="text-center pt-3">
-            ---------------------------- Or sign up with --------------------------
-            <div className="pt-3">
-              <i className="fab fa-facebook fa-lg"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <i className="fab fa-google fa-lg"></i>
+
+            <div className="social-signup">
+              <p>Or sign up with</p>
+              <div className="social-buttons">
+                <button type="button" className="social-btn facebook">
+                  <i className="fab fa-facebook-f"></i>
+                </button>
+                <button type="button" className="social-btn google">
+                  <i className="fab fa-google"></i>
+                </button>
+              </div>
             </div>
+          </form>
+
+          <div className="login-link">
+            Already have an account? <Link to="/login">Log In</Link>
           </div>
-        </form>
+        </div>
       </div>
-      <br />
 
       {/* Footer */}
       <Footer />
