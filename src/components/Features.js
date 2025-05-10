@@ -22,7 +22,7 @@ const Features=()=>{
                     </div>
                   </div>
                   <div className="feature-text">
-                    <h3>24/07 Support</h3>
+                    <h3>24/7 Support</h3>
                   </div>
                 </div>
               </div>
