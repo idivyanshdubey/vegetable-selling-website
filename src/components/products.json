@@ -149,8 +149,21 @@
         "size": "Fruits",
         "price": 120,
         "quantity": 0
+    },
+     {
+        "id": "18",
+        "title": "Ginger",
+        "image": "ginger.jpg",
+        "size": "Vegetables",
+        "price": 10,
+        "quantity": 0
+    },
+     {
+        "id": "19",
+        "title": "Cabbage",
+        "image": "cabbage.jpg",
+        "size": "Vegetables",
+        "price": 120,
+        "quantity": 0
     }
-
-  
-  
 ]

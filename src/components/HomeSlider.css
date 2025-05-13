@@ -1,27 +1,25 @@
 body ,html{
- 
     font-family:'Barlow Condensed', sans-serif;
-  }
-  a{
-     text-decoration:none;
-     color:white;
-     
-  }
-  
-  a:hover{
-    color:grey;
-  }
-  .button{
+}
+a{
+    text-decoration:none;
+    color:white;
+}
+
+a:hover{
+    color:#e7d6d6; /* Slightly lighter instead of pure white for better contrast */
+}
+.button{
     text-decoration:none;
     outline:0;
-  }
-  button:hover{
+}
+button:hover{
     transition:all 0.6s ease-in;
     -o-transition:all 0.6s ease-in;
     -moz-transition:all 0.6s ease-in;
     -webkit-transition:all 0.6s ease-in;
-  }
-  .main-btn{
+}
+.main-btn{
     position:relative;
     color:rgb(255, 255, 255);
     background:linear-gradient(to right,#0f7404,#5cb917);
@@ -33,65 +31,72 @@ body ,html{
     font-size:1.2rem;
     font-weight:600;
     margin-right:20px;
-  }
-  .main-btn:hover{
-   background:white;
+    transition: background 0.4s ease, color 0.4s ease, border 0.4s ease;
+    /* Prevent button from expanding or shifting on hover */
+    box-sizing: border-box;
+}
+.main-btn:hover{
+    background:white;
     color:green;
     border:0.19rem solid green;
-  
-  }
+    /* Ensure text color stays green and not white */
+    transform: none !important;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: none;
+}
 
-  .slider_section1 .x{
+.slider_section1 .x{
     top:15%;
     left:63%;
     position:absolute;
-  }
-  .slider_section1 .carousel-item{
-     height:627px;
-     position:relative;
-  }
-  .slider_section1 .carbtn{
+    animation: fadeIn 1s ease-in-out;
+}
+.slider_section1 .carousel-item{
+    height:627px;
+    position:relative;
+    transition: transform 0.6s ease-in-out;
+}
+.slider_section1 .carbtn{
     padding:0.5rem 1.3rem;
-    
-  }
-   
-  .slider_section1 .c3{
+}
+ 
+.slider_section1 .c3{
     background-color:white;
     background-repeat: no-repeat;
     background-position:center;
     background-size:cover;
-  }
-  .slider_section1 .carousel-caption{
+}
+.slider_section1 .carousel-caption{
     top:25%;
     left:17%;right:0;
     bottom:0;
     text-align:left;
     width:100%;
     position:absolute;
-  }
-   
-   
-  
-  
-  
-   .heading
-   {
-        text-align:center;
-        padding:6rem 0;
-        padding-bottom:3rem;
-        font-size:2.5rem;
-        color:black;
-        margin-bottom:0px;
-   }
-   .heading span{
-        background-color:green;
-      color:white;
-      display:inline-block;
-      padding:.5rem 3rem;
-      clip-path:polygon(100% 0,93% 50%,100% 99%,0% 100%,7% 50%,0% 0%);
-   }
+    /* Remove animation here to prevent overlap on "Become a Seller" */
+    /* animation: slideInLeft 0.8s ease-out; */
+}
 
-   .upper-half {
+.heading{
+    text-align:center;
+    padding:6rem 0;
+    padding-bottom:3rem;
+    font-size:2.5rem;
+    color:black;
+    margin-bottom:0px;
+    animation: fadeIn 1s ease-in-out;
+}
+.heading span{
+    background-color:green;
+    color:white;
+    display:inline-block;
+    padding:.5rem 3rem;
+    clip-path:polygon(100% 0,93% 50%,100% 99%,0% 100%,7% 50%,0% 0%);
+    animation: scaleIn 0.5s ease-in-out;
+}
+
+.upper-half {
     position: absolute;
     top: 0;
     left: 0;
@@ -99,9 +104,10 @@ body ,html{
     height: 50%;
     background-color: white;
     clip-path: polygon(0 0, 100% 0, 100% 50%, 0 0);
-  }
-  
-  .lower-half {
+    animation: slideInDown 0.8s ease-out;
+}
+
+.lower-half {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -109,8 +115,9 @@ body ,html{
     height: 50%;
     background-color: #317e37;
     clip-path: polygon(0 100%, 100% 0%, 100% 100%, 0 100%);
-  }
-  .left-text {
+    animation: slideInUp 0.8s ease-out;
+}
+.left-text {
     position: absolute;
     font-family: Copperplate, Papyrus, fantasy;
     font-style: italic;
@@ -120,8 +127,9 @@ body ,html{
     transform: translateY(-50%);
     font-size: 60px;
     color: #196423;
-  }
-  .left-text-2 {
+    animation: slideInLeft 0.5s ease-out;
+}
+.left-text-2 {
     position: absolute;
     font-family: cursive;
     font-weight: 900;
@@ -130,8 +138,9 @@ body ,html{
     transform: translateY(-50%);
     font-size: 60px;
     color: #075213;
-  }
-  .left-text-3 {
+    animation: slideInLeft 0.7s ease-out;
+}
+.left-text-3 {
     position: absolute;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 900;
@@ -140,40 +149,171 @@ body ,html{
     transform: translateY(-50%);
     font-size: 60px;
     color: #0a6419;
-  }
-  .left-text-4 {
+    animation: slideInLeft 0.9s ease-out;
+}
+.left-text-4 {
     position: absolute;
-   
     font-weight: 300;
     top: 67%;
     left: 9%;
     transform: translateY(-50%);
     font-size: 20px;
     color: #050a06;
-  }
-  
-  .centered-image {
+    animation: slideInLeft 1.1s ease-out;
+}
+
+.centered-image {
     position: absolute;
     top: 50%;
     right: 30%;
     height:auto;
     width: 40%;
     transform: translate(50%, -50%);
-  }
-  .right-bottom-image {
+    animation: fadeIn 1s ease-in-out;
+}
+.right-bottom-image {
     position: absolute;
     top: 40%;
     left:70%;
-    
     height:auto;
     width:5%;
-    transform: translate(50%, -50%);
-    transform: rotate(320deg);
-  }
-  .buy-button {
+    transform: translate(50%, -50%) rotate(320deg);
+    animation: rotateIn 1s ease-in-out;
+}
+.buy-button {
     position: absolute;
     top: 75%;
     left: 11%;
-    
-  }
-    
+    animation: fadeIn 1.3s ease-in-out;
+    z-index: 2;
+    /* Prevent button from overflowing its box */
+    overflow: hidden;
+}
+.buy-button .main-btn {
+    /* Prevent button from expanding or shifting on hover */
+    box-sizing: border-box;
+    transform: none !important;
+    outline: none;
+    box-shadow: none;
+}
+.buy-button .main-btn:hover {
+    background: white;
+    color: green;
+    border: 0.19rem solid green;
+    /* Prevent any unwanted transformations */
+    transform: none !important;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Fix for any links inside text elements to maintain their color on hover */
+.left-text a,
+.left-text-2 a,
+.left-text-3 a,
+.left-text-4 a {
+    color: inherit;
+    transition: color 0.3s;
+}
+.left-text a:hover,
+.left-text-2 a:hover,
+.left-text-3 a:hover,
+.left-text-4 a:hover {
+    color: #317e37; /* Use a green shade for hover for better contrast */
+    text-decoration: underline;
+}
+
+/* Fix for "Become a Seller" button overlapping animation */
+.become-seller-btn {
+    position: absolute;
+    top: 85%;
+    left: 11%;
+    z-index: 3;
+    animation: fadeIn 1.5s ease-in-out;
+    /* Prevent button from overflowing its box */
+    overflow: hidden;
+}
+.become-seller-btn .main-btn {
+    background: linear-gradient(to right, #5cb917, #0f7404);
+    color: white;
+    border: 0.2rem solid white;
+    transition: background 0.4s, color 0.4s, border 0.4s;
+    /* Prevent button from expanding or shifting on hover */
+    box-sizing: border-box;
+    transform: none !important;
+    outline: none;
+    box-shadow: none;
+}
+.become-seller-btn .main-btn:hover {
+    background: white;
+    color: #0f7404;
+    border: 0.19rem solid #0f7404;
+    /* Prevent any unwanted transformations */
+    transform: none !important;
+    box-sizing: border-box;
+    outline: none;
+    box-shadow: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        transform: translate(50%, -50%) rotate(0deg);
+        opacity: 0;
+    }
+    to {
+        transform: translate(50%, -50%) rotate(320deg);
+        opacity: 1;
+    }
+}

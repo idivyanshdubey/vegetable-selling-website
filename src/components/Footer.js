@@ -54,7 +54,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="./card">
                     Products &amp; Prices
                   </a>
                 </li>
@@ -72,7 +72,7 @@ const Footer = () => {
                 </li>
                 <li className="phone">
                   <a href="tel:+918126263458">
-                    +91 8126263458
+                    +91 8368959173
                   </a>
                 </li>
                 <li className="email">

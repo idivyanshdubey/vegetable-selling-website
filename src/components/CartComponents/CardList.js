@@ -1,5 +1,5 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import Cardy from './Cardy';
+import React, { Fragment, useState, useEffect } from "react";
+import Cardy from "./Cardy";
 
 const CardList = ({ products, addToCart }) => {
   const [delay, setDelay] = useState(true);
@@ -23,10 +23,14 @@ const CardList = ({ products, addToCart }) => {
         />
       ) : (
         <div>
-          <span className="products-length">{products.length} Product(s) found.</span>
+          <span className="products-length">
+            {products.length} Product(s) found.
+          </span>
           <div className="card-list">
             {products.length === 0 ? (
-              <p className="text-center">Sorry, No products of the specified categories :-(</p>
+              <p className="text-center">
+                Sorry, No products of the specified categories :-(
+              </p>
             ) : (
               products.map((item) => (
                 <Cardy key={item.id} data={item} addToCart={addToCart} />

@@ -1,46 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import './Cardy.css';
 
 const Cardy = ({ data, addToCart }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const handleAddToCart = () => {
+    addToCart(data);
+  };
+
   return (
-    <div
-      className="card text-center pt-2 pb-3"
-      style={{
-        border: '1px solid #f1e8e8',
-        boxShadow: '5px 5px 15px grey',
-        margin: '30px',
-        marginBottom: '40px',
-      }}
+    <div 
+      className="cardy-card"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div style={{ width: 'auto' }}>
-        <div style={{ width: '200px', height: '150px' }}>
+      <div className="cardy-card-content">
+        <div className="cardy-image-container">
           <img
             src={
               data.image
-                ? require(`../../assets/${data.image}`) // Use local image if available
-                : data.url // Fallback to external URL
+                ? require(`../../assets/${data.image}`)
+                : data.url
             }
-            className="card-img-top"
+            className="cardy-card-img-top"
             alt={data.title}
             title={data.title}
-            width="80%"
-            height="100%"
-            style={{ objectFit: 'cover' }}
           />
+          {isHovered && (
+            <div className="cardy-quick-add">
+              <button
+                className="cardy-quick-add-btn"
+                onClick={handleAddToCart}
+              >
+                Quick Add
+              </button>
+            </div>
+          )}
         </div>
-        <h3 className="card-title">{data.title}</h3>
-        <p className="price">
+        
+        <h3 className="cardy-card-title">{data.title}</h3>
+        <p className="cardy-price">
           Price: <span>Rs {data.price}/kg</span>
         </p>
+        
         <button
-          className="add-to-cart"
-          style={{
-            backgroundColor: 'rgb(44 125 48)',
-            padding: 2,
-            paddingLeft: 11,
-            paddingRight: 11,
-            color: 'white',
-          }}
-          onClick={() => addToCart(data)}
+          className="cardy-add-to-cart"
+          onClick={handleAddToCart}
         >
           Add to cart
         </button>

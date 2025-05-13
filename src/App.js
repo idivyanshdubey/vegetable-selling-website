@@ -8,6 +8,7 @@ import Signup from './page/Signup.js';
 import Login from './page/Login.js'; // Import Login component
 import Card from './components/Card.js';
 import CheckOut from './page/CheckOut.js';
+import MyProfile from './page/MyProfile.js';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="login" element={<Login />} /> {/* Add Login route */}
         <Route path="card" element={<Card />} />
         <Route path="checkout" element={<CheckOut />} />
+        <Route path="myprofile" element={<MyProfile />} />
       </Routes>
     </BrowserRouter>
   );
