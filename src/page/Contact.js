@@ -130,7 +130,7 @@ const Contact = () => {
     <div className="contact-page">
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="/">
             <span className="logo-text">
               OrgoMart
               <span className="logo-image">
@@ -188,7 +188,7 @@ const Contact = () => {
               <li className="nav-item dropdown me-2">
                 <a
                   className="nav-link"
-                  href="#"
+                  href="/"
                   id="navbarDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -197,34 +197,34 @@ const Contact = () => {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/profile">
                       My Profile
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/orders">
                       Orders
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/coupons">
                       Coupons
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href="/logout">
                       Logout
                     </a>
                   </li>
                 </ul>
               </li>
               <li className="nav-item me-2">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/wishlist">
                   <i className="fas fa-heart fa-lg" />
                 </a>
               </li>
               <li className="nav-item me-2">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href="/cart">
                   <div>
                     <i className="fas fa-shopping-cart fa-lg" />
                   </div>
@@ -401,5 +401,4 @@ const Contact = () => {
     </div>
   );
 };
-
 export default Contact;

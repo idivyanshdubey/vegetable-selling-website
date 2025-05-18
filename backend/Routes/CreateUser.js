@@ -1,22 +1,15 @@
-const User=require('../models/User')
-const express=require("express");
-const router=express.Router();
- router.post("/createuser",async(req,res)=>{
-    try{
-       
-       await User.create({
-            name:"Malvika",
-            email:"malvika@gmail.com",
-            password:"12345678"
-            
-        })
+const express = require("express");
+const User = require("../models/User"); // Assuming a User model is defined
+const router = express.Router();
 
-        res.json({success:true});
-      
-    }
-    catch(err) {
-       console.log("errr");
-       res.json({success:false})
-    }
-})
-module.exports=router;
+router.post("/signup", async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.json({ message: "User registered successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Signup failed" });
+  }
+});
+
+module.exports = router;

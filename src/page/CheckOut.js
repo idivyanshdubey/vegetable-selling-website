@@ -41,21 +41,21 @@ function CheckOut() {
             </ul>
             <ul className="navbar-nav mx-right">
               <li className="nav-item dropdown me-2">
-                <a className="nav-link" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <a className="nav-link" href="/" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="fas fa-user fa-lg" />
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a className="dropdown-item" href="#">My Profile</a></li>
-                  <li><a className="dropdown-item" href="#">Orders</a></li>
-                  <li><a className="dropdown-item" href="#">Coupons</a></li>
-                  <li><a className="dropdown-item" href="#">Logout</a></li>
+                  <li><a className="dropdown-item" href="/profile">My Profile</a></li>
+                  <li><a className="dropdown-item" href="/orders">Orders</a></li>
+                  <li><a className="dropdown-item" href="/coupons">Coupons</a></li>
+                  <li><a className="dropdown-item" href="/logout">Logout</a></li>
                 </ul>
               </li>
               <li className="nav-item me-2">
-                <a className="nav-link" href="#"><i className="fas fa-heart fa-lg" /></a>
+                <a className="nav-link" href="/wishlist"><i className="fas fa-heart fa-lg" /></a>
               </li>
               <li className="nav-item me-4">
-                <a className="nav-link" href="#"><i className="fas fa-shopping-cart fa-lg" /></a>
+                <a className="nav-link" href="/cart"><i className="fas fa-shopping-cart fa-lg" /></a>
               </li>
             </ul>
           </div>
@@ -121,5 +121,4 @@ function CheckOut() {
     </>
   );
 }
-
 export default CheckOut;

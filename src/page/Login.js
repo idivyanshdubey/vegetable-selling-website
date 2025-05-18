@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Login.css'; // Ensure your CSS file is correctly linked
 
 const Login = () => {
@@ -63,23 +64,22 @@ const Login = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       setIsSubmitting(true);
 
-      // Simulate API call
-      setTimeout(() => {
-        setIsSubmitting(false);
+      try {
+        const response = await axios.post('http://localhost:5000/api/login', formData);
+        console.log('Login successful!', response.data);
         setIsSuccess(true);
+      } catch (error) {
+        console.error('Login failed:', error.response?.data || 'Unknown error');
+        setFormErrors({ email: 'Invalid email or password' });
+      }
 
-        // Reset success state after showing success animation
-        setTimeout(() => {
-          setIsSuccess(false);
-          console.log('Login successful!', formData);
-        }, 2000);
-      }, 1500);
+      setIsSubmitting(false);
     } else {
       // Add shake animation to form on error
       const form = document.querySelector('.login-form');
@@ -113,7 +113,7 @@ const Login = () => {
               />
               <i className="input-icon fas fa-envelope"></i>
             </div>
-            {formErrors.email && <div className="error-message" style={{ display: 'block' }}>{formErrors.email}</div>}
+            {formErrors.email && <div className="error-message">{formErrors.email}</div>}
           </div>
 
           <div className="form-group">
@@ -133,7 +133,7 @@ const Login = () => {
                 onClick={togglePasswordVisibility}
               ></i>
             </div>
-            {formErrors.password && <div className="error-message" style={{ display: 'block' }}>{formErrors.password}</div>}
+            {formErrors.password && <div className="error-message">{formErrors.password}</div>}
           </div>
 
           <div className="remember-me">
