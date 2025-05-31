@@ -22,7 +22,7 @@ This project is designed with a user-friendly interface, real-time cart function
 <details>
 <summary>Home Page</summary>
 
-![Home Page](assets/home.png)
+![Home Page](src/assets/home.png)
 
 *Browse a wide variety of fresh vegetables with intuitive filters and search.*
 
@@ -31,7 +31,7 @@ This project is designed with a user-friendly interface, real-time cart function
 <details>
 <summary>Cart Page</summary>
 
-![Cart Page](assets/cart.png)
+![Cart Page](src/assets/cart.png)
 
 *Manage your selected items, update quantities, and proceed to checkout with real-time price calculation.*
 
