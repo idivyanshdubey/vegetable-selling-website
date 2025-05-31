@@ -13,7 +13,12 @@ import MyProfile from "./page/MyProfile.js";
 
 function Home() {
   const navigateTo = (path) => {
-    window.location.href = path; // Simple navigation using window.location.href
+    window.location.href = path;
+  };
+
+  const handlePrevent = (e, path) => {
+    e.preventDefault();
+    navigateTo(path);
   };
 
   return (
@@ -47,7 +52,7 @@ function Home() {
                   paddingLeft: 7,
                   paddingRight: 8,
                 }}
-                onClick={() => navigateTo("./signup")}
+                onClick={() => navigateTo("/signup")}
               >
                 Sign up
               </button>
@@ -70,8 +75,9 @@ function Home() {
         >
           <div className="container-fluid">
             <a
+              href="#"
               className="navbar-brand"
-              onClick={() => navigateTo("./")}
+              onClick={(e) => handlePrevent(e, "/")}
               style={{ cursor: "pointer" }}
             >
               <span className="logo-text">
@@ -99,36 +105,46 @@ function Home() {
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item">
                   <a
+                    href="#"
                     className="nav-link active"
                     aria-current="page"
-                    onClick={() => navigateTo("/")}
+                    onClick={(e) => handlePrevent(e, "/")}
                   >
                     Home
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
+                    href="#"
                     className="nav-link"
-                    onClick={() => navigateTo("./aboutUs")}
+                    onClick={(e) => handlePrevent(e, "/aboutUs")}
                   >
                     About Us
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" onClick={() => navigateTo("./card")}>
+                  <a
+                    href="#"
+                    className="nav-link"
+                    onClick={(e) => handlePrevent(e, "/card")}
+                  >
                     Products
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
+                    href="#"
                     className="nav-link"
-                    onClick={() => navigateTo("./contact")}
+                    onClick={(e) => handlePrevent(e, "/contact")}
                   >
                     Contact
                   </a>
                 </li>
               </ul>
-              <form className="d-flex mx-auto">
+              <form
+                className="d-flex mx-auto"
+                onSubmit={(e) => e.preventDefault()}
+              >
                 <input
                   className="form-control me-2"
                   type="search"
@@ -140,56 +156,25 @@ function Home() {
                 </button>
               </form>
               <ul className="navbar-nav mx-right">
-                <li className="nav-item dropdown me-2">
+                <li className="nav-item me-2">
                   <a
-                    className="nav-link"
                     href="#"
-                    id="navbarDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    className="nav-link"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateTo("/myprofile");
+                    }}
                   >
                     <i className="fas fa-user fa-lg" />
                   </a>
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    <li>
-                      <a
-                        className="dropdown-item"
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          navigateTo("./myprofile");
-                        }}
-                      >
-                        My Profile
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Orders
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Coupons
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 <li className="nav-item me-2">
-                  <a className="nav-link" href="#">
+                  <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>
                     <i className="fas fa-heart fa-lg" />
                   </a>
                 </li>
                 <li className="nav-item me-2">
-                  <a className="nav-link" href="#">
+                  <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>
                     <i className="fas fa-shopping-cart fa-lg" />
                   </a>
                 </li>

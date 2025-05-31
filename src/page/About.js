@@ -153,7 +153,7 @@ const About = () => {
                   <i className="fas fa-user fa-lg" />
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a className="dropdown-item" href="#">My Profile</a></li>
+                  <li><a className="dropdown-item" href="">My Profile</a></li>
                   <li><a className="dropdown-item" href="#">Orders</a></li>
                   <li><a className="dropdown-item" href="#">Coupons</a></li>
                   <li><a className="dropdown-item" href="#">Logout</a></li>

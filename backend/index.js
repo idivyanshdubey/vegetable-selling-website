@@ -1,26 +1,24 @@
 // index.js
-require("dotenv").config();        // 1️⃣ Load .env before anything else
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const mongoDb = require("./db");   // Import MongoDB connection file
+const mongoDb = require("./db");
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
 
-// 2️⃣ Connect to MongoDB using your MONGO_URI from .env
 mongoDb();
 
-// Routes
-app.use("/api", require("./Routes/authRoutes.js"));
-app.use("/api", require("./Routes/CreateUser.js"));
-app.use("/api", require("./Routes/DisplayData.js"));
+// Define your routes clearly:
+app.use("/api/auth", require("./Routes/authRoutes"));     // for login/signup
+app.use("/api/data", require("./Routes/DisplayData"));    // data fetching
+app.use("/api", require("./Routes/profileRoutes"));
 
-// Test Route
+
 app.get("/", (req, res) => res.send("Server is running"));
 
-// 3️⃣ Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

@@ -319,3 +319,12 @@ body {
   max-width: 400px;
   padding: 20px;
 }
+
+.login-container {
+  transition: opacity 0.8s ease;
+  opacity: 1;
+}
+
+.login-container.fade-out {
+  opacity: 0;
+}

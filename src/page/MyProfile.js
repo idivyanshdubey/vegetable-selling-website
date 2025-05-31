@@ -16,22 +16,20 @@ const MyProfile = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in
-    const authToken = localStorage.getItem("authToken");
-    if (!authToken) {
-      navigate("/login");
-      return;
-    }
-
-    // Fetch user data
     const fetchUserData = async () => {
       try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          navigate("/login");
+          return;
+        }
+
         setIsLoading(true);
         const response = await fetch("http://localhost:5000/api/myprofile", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `Bearer ${token}`,
           },
         });
 
@@ -43,8 +41,6 @@ const MyProfile = () => {
             phone: data.phone || "",
             address: data.address || "",
           });
-
-          // Mock orders data (replace with actual API call in production)
           setOrders([
             {
               id: "1001",
@@ -70,7 +66,6 @@ const MyProfile = () => {
           ]);
         } else {
           console.error("Failed to fetch user data");
-          navigate("/login");
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -89,14 +84,19 @@ const MyProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const authToken = localStorage.getItem("authToken");
 
     try {
-      const response = await fetch("http://localhost:5000/api/updateprofile", {
-        method: "POST",
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/login");
+        return;
+      }
+
+      const response = await fetch("http://localhost:5000/api/myprofile", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(userData),
       });
@@ -105,7 +105,12 @@ const MyProfile = () => {
         setIsEditing(false);
         alert("Profile updated successfully!");
       } else {
-        alert("Failed to update profile");
+        const errData = await response.json();
+        alert(
+          `Failed to update profile: ${
+            errData.message || response.statusText
+          }`
+        );
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -114,7 +119,7 @@ const MyProfile = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("token"); // ✅ Clear token on logout
     navigate("/login");
   };
 
@@ -127,12 +132,9 @@ const MyProfile = () => {
       </div>
     );
   }
-
   return (
     <>
-      <div
-        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
-      >
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         {/* Top Navbar */}
         <nav className="navbar navbar-light nav1">
           <div className="container-fluid d-flex align-items-center">
@@ -167,6 +169,13 @@ const MyProfile = () => {
             </div>
             <div className="header_right me-4">
               <div className="navbar-text">
+                {/* Show user name only here */}
+                {userData.name && (
+                  <>
+                    <span className="me-2">{userData.name}</span>
+                    <span className="mx-2">|</span>
+                  </>
+                )}
                 <span>
                   <i className="fas fa-phone-alt" />
                 </span>
@@ -266,7 +275,9 @@ const MyProfile = () => {
                         className="dropdown-item active"
                         onClick={() => navigate("/myprofile")}
                       >
-                        My Profile
+                        {userData.name
+                          ? `My Profile (${userData.name})`
+                          : "My Profile"}
                       </a>
                     </li>
                     <li>
@@ -325,10 +336,7 @@ const MyProfile = () => {
                       <i className="fas fa-heart me-2"></i> Wishlist
                     </li>
                     <li className="list-group-item">
-                      <i className="fas fa-ticket-alt me-2"></i> Coupons
-                    </li>
-                    <li className="list-group-item">
-                      <i className="fas fa-map-marker-alt me-2"></i> Addresses
+                      <i className="fas fa-cog me-2"></i> Settings
                     </li>
                     <li
                       className="list-group-item"
@@ -342,163 +350,131 @@ const MyProfile = () => {
               </div>
             </div>
             <div className="col-md-9">
-              <div className="profile-content">
-                <div className="card">
-                  <div className="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                    <h5 className="mb-0">Personal Information</h5>
-                    <button
-                      className="btn btn-sm btn-light"
-                      onClick={() => setIsEditing(!isEditing)}
-                    >
-                      {isEditing ? "Cancel" : "Edit"}
-                    </button>
-                  </div>
-                  <div className="card-body">
-                    {isEditing ? (
-                      <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                          <label htmlFor="name" className="form-label">
-                            Full Name
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="name"
-                            name="name"
-                            value={userData.name}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label htmlFor="email" className="form-label">
-                            Email Address
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control"
-                            id="email"
-                            name="email"
-                            value={userData.email}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label htmlFor="phone" className="form-label">
-                            Phone Number
-                          </label>
-                          <input
-                            type="tel"
-                            className="form-control"
-                            id="phone"
-                            name="phone"
-                            value={userData.phone}
-                            onChange={handleInputChange}
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <label htmlFor="address" className="form-label">
-                            Delivery Address
-                          </label>
-                          <textarea
-                            className="form-control"
-                            id="address"
-                            name="address"
-                            rows="3"
-                            value={userData.address}
-                            onChange={handleInputChange}
-                          ></textarea>
-                        </div>
-                        <button type="submit" className="btn btn-success">
-                          Save Changes
-                        </button>
-                      </form>
-                    ) : (
-                      <div className="row">
-                        <div className="col-md-6">
-                          <p>
-                            <strong>Name:</strong> {userData.name}
-                          </p>
-                          <p>
-                            <strong>Email:</strong> {userData.email}
-                          </p>
-                        </div>
-                        <div className="col-md-6">
-                          <p>
-                            <strong>Phone:</strong>{" "}
-                            {userData.phone || "Not provided"}
-                          </p>
-                          <p>
-                            <strong>Address:</strong>{" "}
-                            {userData.address || "Not provided"}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+              <h2>My Profile</h2>
+              {!isEditing ? (
+                <div className="profile-details">
+                  <p>
+                    <strong>Name:</strong> {userData.name}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {userData.email}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {userData.phone}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {userData.address}
+                  </p>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => setIsEditing(true)}
+                  >
+                    Edit Profile
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="form-control"
+                      value={userData.name}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="form-control"
+                      value={userData.email}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="phone" className="form-label">
+                      Phone
+                    </label>
+                    <input
+                      type="text"
+                      id="phone"
+                      name="phone"
+                      className="form-control"
+                      value={userData.phone}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="address" className="form-label">
+                      Address
+                    </label>
+                    <textarea
+                      id="address"
+                      name="address"
+                      className="form-control"
+                      value={userData.address}
+                      onChange={handleInputChange}
+                      rows={3}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-success me-2">
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setIsEditing(false)}
+                  >
+                    Cancel
+                  </button>
+                </form>
+              )}
 
-                <div className="card mt-4">
-                  <div className="card-header bg-success text-white">
-                    <h5 className="mb-0">Recent Orders</h5>
-                  </div>
-                  <div className="card-body">
-                    {orders.length > 0 ? (
-                      <div className="table-responsive">
-                        <table className="table table-hover">
-                          <thead>
-                            <tr>
-                              <th>Order ID</th>
-                              <th>Date</th>
-                              <th>Items</th>
-                              <th>Total</th>
-                              <th>Status</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {orders.map((order) => (
-                              <tr key={order.id}>
-                                <td>#{order.id}</td>
-                                <td>{order.date}</td>
-                                <td>{order.items}</td>
-                                <td>₹{order.total}</td>
-                                <td>
-                                  <span
-                                    className={`badge ${
-                                      order.status === "Delivered"
-                                        ? "bg-success"
-                                        : order.status === "Processing"
-                                        ? "bg-warning"
-                                        : "bg-info"
-                                    }`}
-                                  >
-                                    {order.status}
-                                  </span>
-                                </td>
-                                <td>
-                                  <button className="btn btn-sm btn-outline-success">
-                                    View
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    ) : (
-                      <div className="text-center py-4">
-                        <i className="fas fa-shopping-bag fa-3x mb-3 text-muted"></i>
-                        <p>You haven't placed any orders yet.</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+              {/* Orders Section */}
+              <div className="mt-5">
+                <h3>My Orders</h3>
+                {orders.length === 0 ? (
+                  <p>No orders found.</p>
+                ) : (
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {orders.map((order) => (
+                        <tr key={order.id}>
+                          <td>{order.id}</td>
+                          <td>{order.date}</td>
+                          <td>{order.items}</td>
+                          <td>₹{order.total}</td>
+                          <td>{order.status}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           </div>
         </div>
+
         <Footer />
       </div>
     </>

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer.js';
 import icon from '../assets/contacticon3.png';
 import '../page/Signup.css';
+import axios from 'axios';
 
 function Signup() {
-  // State for form inputs
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,22 +13,17 @@ function Signup() {
     confirmPassword: ''
   });
 
-  // State for error messages
   const [errors, setErrors] = useState({});
-  
-  // State for form submission
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // Handle input changes
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
-    
-    // Clear error for this field when user starts typing
+
     if (errors[id]) {
       setErrors(prev => ({
         ...prev,
@@ -37,77 +32,77 @@ function Signup() {
     }
   };
 
-  // Validate form
   const validateForm = () => {
     const newErrors = {};
-    
-    // Name validation
+
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = 'Please enter your full name.';
     }
-    
-    // Email validation
+
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email address is required.';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email address is invalid';
+      newErrors.email = 'Please enter a valid email address.';
     }
-    
-    // Password validation
+
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Password is required.';
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = 'Password must be at least 8 characters long.';
     } else if (formData.password.length > 20) {
-      newErrors.password = 'Password must be less than 20 characters';
-    } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(formData.password)) {
-      newErrors.password = 'Password must contain at least one letter and one number';
+      newErrors.password = 'Password must not exceed 20 characters.';
+    } else if (!/(?=.*[A-Za-z])(?=.*\d).{8,}/.test(formData.password)) {
+      newErrors.password = 'Password must include at least one letter and one number. Special characters are allowed.';
     }
-    
-    // Confirm password validation
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password.';
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match. Please re-enter.';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (validateForm()) {
-      setIsSubmitting(true);
-      
-      try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        console.log('Form submitted:', formData);
-        setSubmitSuccess(true);
-        
-        // Reset form after successful submission
-        setTimeout(() => {
-          setFormData({
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-          });
-          setSubmitSuccess(false);
-        }, 3000);
-      } catch (error) {
-        setErrors({ form: 'An error occurred. Please try again.' });
-      } finally {
-        setIsSubmitting(false);
-      }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) return;
+
+  setIsSubmitting(true);
+  setErrors({});
+  setSubmitSuccess(false);
+
+  try {
+    const response = await axios.post('http://localhost:5000/api/auth/signup', {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+    });
+
+    if (response.status === 201) {
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
     }
-  };
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      setErrors({ form: error.response.data.message });
+    } else {
+      setErrors({ form: 'An unexpected error occurred. Please try again.' });
+    }
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="signup-page">
-      {/* Navbar */}
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
@@ -131,90 +126,34 @@ function Signup() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="./aboutUs">
-                  About Us
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="./card">
-                  Products
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="./contact">
-                  Contact
-                </a>
-              </li>
+              <li className="nav-item"><a className="nav-link active" href="/">Home</a></li>
+              <li className="nav-item"><a className="nav-link" href="/aboutUs">About Us</a></li>
+              <li className="nav-item"><a className="nav-link" href="/card">Products</a></li>
+              <li className="nav-item"><a className="nav-link" href="/contact">Contact</a></li>
             </ul>
             <form className="d-flex mx-auto">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-light" type="submit">
-                Search
-              </button>
+              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <button className="btn btn-outline-light" type="submit">Search</button>
             </form>
             <ul className="navbar-nav mx-right">
               <li className="nav-item dropdown me-2">
-                <a
-                  className="nav-link"
-                  href="#"
-                  id="navbarDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                <a className="nav-link" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="fas fa-user fa-lg" />
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      My Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Orders
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Coupons
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Logout
-                    </a>
-                  </li>
+                  <li><a className="dropdown-item" href="#">My Profile</a></li>
+                  <li><a className="dropdown-item" href="#">Orders</a></li>
+                  <li><a className="dropdown-item" href="#">Coupons</a></li>
+                  <li><a className="dropdown-item" href="#">Logout</a></li>
                 </ul>
               </li>
-              <li className="nav-item me-2">
-                <a className="nav-link" href="#">
-                  <i className="fas fa-heart fa-lg" />
-                </a>
-              </li>
-              <li className="nav-item me-2">
-                <a className="nav-link" href="#">
-                  <div>
-                    <i className="fas fa-shopping-cart fa-lg" />
-                  </div>
-                </a>
-              </li>
+              <li className="nav-item me-2"><a className="nav-link" href="#"><i className="fas fa-heart fa-lg" /></a></li>
+              <li className="nav-item me-2"><a className="nav-link" href="#"><i className="fas fa-shopping-cart fa-lg" /></a></li>
             </ul>
           </div>
         </div>
       </nav>
 
-      {/* Signup Form */}
       <div className="signup-container">
         <div className="signup-form-wrapper">
           <div className="signup-header">
@@ -239,9 +178,7 @@ function Signup() {
             <div className="form-group">
               <label htmlFor="name">Full Name</label>
               <div className="input-group">
-                <span className="input-group-text">
-                  <i className="fas fa-user"></i>
-                </span>
+                <span className="input-group-text"><i className="fas fa-user"></i></span>
                 <input
                   type="text"
                   className={`form-control ${errors.name ? 'is-invalid' : ''}`}
@@ -257,9 +194,7 @@ function Signup() {
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <div className="input-group">
-                <span className="input-group-text">
-                  <i className="fas fa-envelope"></i>
-                </span>
+                <span className="input-group-text"><i className="fas fa-envelope"></i></span>
                 <input
                   type="email"
                   className={`form-control ${errors.email ? 'is-invalid' : ''}`}
@@ -278,9 +213,7 @@ function Signup() {
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <div className="input-group">
-                <span className="input-group-text">
-                  <i className="fas fa-lock"></i>
-                </span>
+                <span className="input-group-text"><i className="fas fa-lock"></i></span>
                 <input
                   type="password"
                   className={`form-control ${errors.password ? 'is-invalid' : ''}`}
@@ -292,16 +225,14 @@ function Signup() {
               </div>
               {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               <small className="form-text text-muted">
-                Password must be 8-20 characters long, contain letters and numbers.
+                Password must be 8–20 characters long and include at least one letter and one number. Special characters are allowed.
               </small>
             </div>
 
             <div className="form-group">
               <label htmlFor="confirmPassword">Confirm Password</label>
               <div className="input-group">
-                <span className="input-group-text">
-                  <i className="fas fa-lock"></i>
-                </span>
+                <span className="input-group-text"><i className="fas fa-lock"></i></span>
                 <input
                   type="password"
                   className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
@@ -364,7 +295,6 @@ function Signup() {
         </div>
       </div>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

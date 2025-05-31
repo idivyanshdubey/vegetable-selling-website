@@ -9,6 +9,7 @@ import Login from './page/Login.js'; // Import Login component
 import Card from './components/Card.js';
 import CheckOut from './page/CheckOut.js';
 import MyProfile from './page/MyProfile.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
   return (
