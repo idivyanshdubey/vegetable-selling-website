@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import Home from './Home.js';
 import AboutUs from './page/About.js';
 import Contact from './page/Contact.js';
@@ -9,6 +8,7 @@ import Login from './page/Login.js'; // Import Login component
 import Card from './components/Card.js';
 import CheckOut from './page/CheckOut.js';
 import MyProfile from './page/MyProfile.js';
+import Wishlist from './page/Wishlist.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
         <Route path="card" element={<Card />} />
         <Route path="checkout" element={<CheckOut />} />
         <Route path="myprofile" element={<MyProfile />} />
+        <Route path="wishlist" element={<Wishlist />} />
       </Routes>
     </BrowserRouter>
   );

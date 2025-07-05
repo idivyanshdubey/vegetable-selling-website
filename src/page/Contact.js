@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header.js';
 import bannerImg from '../assets/Banner-1.jpg';
 import smile from '../assets/smile (2).png';
@@ -9,6 +10,7 @@ import Footer from '../components/Footer';
 import './Contact.css';
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [activePanel, setActivePanel] = useState(false);
   const [feedbackForm, setFeedbackForm] = useState({
     name: '',
@@ -130,7 +132,7 @@ const Contact = () => {
     <div className="contact-page">
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <span className="logo-text">
               OrgoMart
               <span className="logo-image">
@@ -152,22 +154,22 @@ const Contact = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a className="nav-link" aria-current="page" href="/">
+                <a className="nav-link" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./aboutUs">
+                <a className="nav-link" onClick={() => navigate('/aboutUs')} style={{ cursor: 'pointer' }}>
                   About Us
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./card">
+                <a className="nav-link" onClick={() => navigate('/card')} style={{ cursor: 'pointer' }}>
                   Products
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="./contact">
+                <a className="nav-link active" onClick={() => navigate('/contact')} style={{ cursor: 'pointer' }}>
                   Contact
                 </a>
               </li>
@@ -185,49 +187,23 @@ const Contact = () => {
               </button>
             </form>
             <ul className="navbar-nav mx-right">
-              <li className="nav-item dropdown me-2">
+              <li className="nav-item me-2">
                 <a
                   className="nav-link"
-                  href="/"
-                  id="navbarDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  onClick={() => navigate("/myprofile")}
+                  style={{ cursor: "pointer" }}
                 >
                   <i className="fas fa-user fa-lg" />
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a className="dropdown-item" href="/profile">
-                      My Profile
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/orders">
-                      Orders
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/coupons">
-                      Coupons
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="/logout">
-                      Logout
-                    </a>
-                  </li>
-                </ul>
               </li>
               <li className="nav-item me-2">
-                <a className="nav-link" href="/wishlist">
+                <a className="nav-link" onClick={() => navigate('/wishlist')} style={{ cursor: 'pointer' }}>
                   <i className="fas fa-heart fa-lg" />
                 </a>
               </li>
               <li className="nav-item me-2">
-                <a className="nav-link" href="/cart">
-                  <div>
-                    <i className="fas fa-shopping-cart fa-lg" />
-                  </div>
+                <a className="nav-link" onClick={() => navigate('/checkout')} style={{ cursor: 'pointer' }}>
+                  <i className="fas fa-shopping-cart fa-lg" />
                 </a>
               </li>
             </ul>

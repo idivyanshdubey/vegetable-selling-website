@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Cardy from "./Cardy";
 
-const CardList = ({ products, addToCart }) => {
+const CardList = ({ products, addToCart, addToWishlist }) => {
   const [delay, setDelay] = useState(true);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const CardList = ({ products, addToCart }) => {
               </p>
             ) : (
               products.map((item) => (
-                <Cardy key={item.id} data={item} addToCart={addToCart} />
+                <Cardy key={item.id} data={item} addToCart={addToCart} addToWishlist={addToWishlist} />
               ))
             )}
           </div>

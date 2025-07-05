@@ -6,7 +6,7 @@ const User = require("../models/User");
 // GET my profile
 router.get("/myprofile", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId).select("-password");
+    const user = await User.findById(req.user.id).select("-password");
     if (!user) return res.status(404).json({ error: "User not found" });
 
     res.json({
@@ -27,7 +27,7 @@ router.put("/myprofile", auth, async (req, res) => {
   const { name, email, phone, address } = req.body;
 
   try {
-    const user = await User.findById(req.user.userId);
+    const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ error: "User not found" });
 
     if (name) user.name = name;

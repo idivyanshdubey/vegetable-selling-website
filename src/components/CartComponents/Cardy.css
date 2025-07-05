@@ -54,6 +54,7 @@
   transition: transform 0.25s ease-out;
   display: flex;
   justify-content: center;
+  gap: 8px;
   backdrop-filter: blur(2px);
 }
 
@@ -76,6 +77,29 @@
 
 .cardy-quick-add-btn:hover {
   background-color: rgb(36, 102, 39);
+}
+
+/* Wishlist button */
+.cardy-wishlist-btn {
+  background-color: #ff6b9d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+}
+
+.cardy-wishlist-btn:hover {
+  background-color: #ff4081;
+  transform: scale(1.05);
 }
 
 /* Product information */

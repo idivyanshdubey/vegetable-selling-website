@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Card.css';
 import Sizes from './CartComponents/Sizes';
 import Products from './CartComponents/Products';
@@ -7,6 +8,7 @@ import filterList from './CartComponents/filterList';
 import Footer from './Footer.js';
 
 const Card = () => {
+  const navigate = useNavigate();
   // State management
   const [products, setProducts] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
@@ -105,6 +107,27 @@ const Card = () => {
     setIsCartOpen(true);
   }, []);
 
+  // Add to wishlist with useCallback
+  const addToWishlist = useCallback((item) => {
+    const savedWishlist = localStorage.getItem('wishlist');
+    const wishlist = savedWishlist ? JSON.parse(savedWishlist) : [];
+    
+    const existingItemIndex = wishlist.findIndex(product => product.id === item.id);
+    
+    if (existingItemIndex === -1) {
+      // Item not in wishlist, add it
+      wishlist.push(item);
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+      
+      // Update wishlist count in header
+      window.dispatchEvent(new Event('storage'));
+      
+      alert(`${item.title} added to wishlist!`);
+    } else {
+      alert(`${item.title} is already in your wishlist!`);
+    }
+  }, []);
+
   // Change quantity with useCallback
   const changeQuantity = useCallback((item, action) => {
     setCart(prevCart => {
@@ -150,7 +173,7 @@ const Card = () => {
     <div style={{ backgroundColor: 'rgb(214, 240, 214)' }}>
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2" style={{ marginBottom: 0 }}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <span className="logo-text">
               OrgoMart
               <span className="logo-image">
@@ -172,43 +195,35 @@ const Card = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">Home</a>
+                <a className="nav-link active" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./aboutUs">About Us</a>
+                <a className="nav-link" onClick={() => navigate('/aboutUs')} style={{ cursor: 'pointer' }}>About Us</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./contact">Products</a>
+                <a className="nav-link" onClick={() => navigate('/card')} style={{ cursor: 'pointer' }}>Products</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="./contact">Contact</a>
+                <a className="nav-link" onClick={() => navigate('/contact')} style={{ cursor: 'pointer' }}>Contact</a>
               </li>
             </ul>
 
             <ul className="navbar-nav mx-right">
-              <li className="nav-item dropdown me-2">
+              <li className="nav-item me-2">
                 <a
                   className="nav-link"
-                  href="#"
-                  id="navbarDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  onClick={() => navigate("/myprofile")}
+                  style={{ cursor: "pointer" }}
                 >
                   <i className="fas fa-user fa-lg" />
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a className="dropdown-item" href="#">My Profile</a></li>
-                  <li><a className="dropdown-item" href="#">Orders</a></li>
-                  <li><a className="dropdown-item" href="#">Coupons</a></li>
-                  <li><a className="dropdown-item" href="#">Logout</a></li>
-                </ul>
               </li>
-              <li className="nav-item me-5">
-                <a className="nav-link" href="#">
+              <li className="nav-item me-2">
+                <a className="nav-link" onClick={() => navigate('/wishlist')} style={{ cursor: 'pointer' }}>
                   <i className="fas fa-heart fa-lg" />
                 </a>
               </li>
-              <li className="nav-item me-4">
+              <li className="nav-item me-2">
                 <Cart
                   products={cart}
                   changeQuantity={changeQuantity}
@@ -233,6 +248,7 @@ const Card = () => {
               products={products}
               sortProducts={sortProducts}
               addToCart={addToCart}
+              addToWishlist={addToWishlist}
             />
           </>
         )}

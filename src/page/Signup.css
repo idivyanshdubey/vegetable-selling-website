@@ -5,6 +5,105 @@
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
+    position: relative;
+  }
+
+  /* Notification System */
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+    animation: slideInRight 0.5s ease-out;
+  }
+
+  .notification-content {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .notification-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  .notification-success {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(102, 187, 106, 0.95));
+    color: white;
+  }
+
+  .notification-error {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.95), rgba(239, 83, 80, 0.95));
+    color: white;
+  }
+
+  .notification-content i:first-child {
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .notification-content span {
+    flex: 1;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .notification-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-left: 0.75rem;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+  }
+
+  .notification-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
   }
   
   /* Signup Container with Glass Morphism */
@@ -188,17 +287,26 @@
   .form-check {
     padding-left: 1.8rem;
     margin-top: 0.5rem;
+    position: relative;
   }
   
   .form-check-input {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.2rem !important;
+    height: 1.2rem !important;
     margin-top: 0.2rem;
     margin-left: -1.8rem;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: all 0.2s;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    min-width: 1.2rem;
+    min-height: 1.2rem;
+    max-width: 1.2rem;
+    max-height: 1.2rem;
   }
   
   .form-check-input:checked {
@@ -209,6 +317,10 @@
   .form-check-label {
     color: #555;
     font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.4;
+    vertical-align: middle;
   }
   
   .form-check-label a {

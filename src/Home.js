@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./components/Header.js";
 import HomeSlider from "./components/HomeSlider.js";
 import Features from "./components/Features.js";
@@ -12,14 +13,7 @@ import Find from "./components/Find.js";
 import MyProfile from "./page/MyProfile.js";
 
 function Home() {
-  const navigateTo = (path) => {
-    window.location.href = path;
-  };
-
-  const handlePrevent = (e, path) => {
-    e.preventDefault();
-    navigateTo(path);
-  };
+  const navigate = useNavigate();
 
   return (
     <>
@@ -52,7 +46,7 @@ function Home() {
                   paddingLeft: 7,
                   paddingRight: 8,
                 }}
-                onClick={() => navigateTo("/signup")}
+                onClick={() => navigate("/signup")}
               >
                 Sign up
               </button>
@@ -75,9 +69,8 @@ function Home() {
         >
           <div className="container-fluid">
             <a
-              href="#"
               className="navbar-brand"
-              onClick={(e) => handlePrevent(e, "/")}
+              onClick={() => navigate("/")}
               style={{ cursor: "pointer" }}
             >
               <span className="logo-text">
@@ -105,37 +98,36 @@ function Home() {
               <ul className="navbar-nav mx-auto">
                 <li className="nav-item">
                   <a
-                    href="#"
                     className="nav-link active"
-                    aria-current="page"
-                    onClick={(e) => handlePrevent(e, "/")}
+                    onClick={() => navigate("/")}
+                    style={{ cursor: "pointer" }}
                   >
                     Home
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
-                    href="#"
                     className="nav-link"
-                    onClick={(e) => handlePrevent(e, "/aboutUs")}
+                    onClick={() => navigate("/aboutUs")}
+                    style={{ cursor: "pointer" }}
                   >
                     About Us
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
-                    href="#"
                     className="nav-link"
-                    onClick={(e) => handlePrevent(e, "/card")}
+                    onClick={() => navigate("/card")}
+                    style={{ cursor: "pointer" }}
                   >
                     Products
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
-                    href="#"
                     className="nav-link"
-                    onClick={(e) => handlePrevent(e, "/contact")}
+                    onClick={() => navigate("/contact")}
+                    style={{ cursor: "pointer" }}
                   >
                     Contact
                   </a>
@@ -158,23 +150,20 @@ function Home() {
               <ul className="navbar-nav mx-right">
                 <li className="nav-item me-2">
                   <a
-                    href="#"
                     className="nav-link"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateTo("/myprofile");
-                    }}
+                    onClick={() => navigate("/myprofile")}
+                    style={{ cursor: "pointer" }}
                   >
                     <i className="fas fa-user fa-lg" />
                   </a>
                 </li>
                 <li className="nav-item me-2">
-                  <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>
+                  <a className="nav-link" onClick={() => navigate("/wishlist")} style={{ cursor: "pointer" }}>
                     <i className="fas fa-heart fa-lg" />
                   </a>
                 </li>
                 <li className="nav-item me-2">
-                  <a href="#" className="nav-link" onClick={(e) => e.preventDefault()}>
+                  <a className="nav-link" onClick={() => navigate("/checkout")} style={{ cursor: "pointer" }}>
                     <i className="fas fa-shopping-cart fa-lg" />
                   </a>
                 </li>

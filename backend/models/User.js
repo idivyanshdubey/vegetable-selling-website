@@ -28,6 +28,52 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  orders: [{
+    orderId: String,
+    items: [{
+      id: String,
+      name: String,
+      price: Number,
+      quantity: Number,
+      image: String
+    }],
+    shipping: {
+      firstName: String,
+      lastName: String,
+      email: String,
+      phone: String,
+      address: String,
+      address2: String,
+      city: String,
+      state: String,
+      zipCode: String,
+      country: String
+    },
+    payment: {
+      method: String,
+      last4: String,
+      transactionId: String
+    },
+    totals: {
+      subtotal: Number,
+      shipping: Number,
+      tax: Number,
+      total: Number
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled'],
+      default: 'pending'
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
+    }
+  }],
 });
 
 // Hash password before saving

@@ -22,7 +22,7 @@ const CartItem = ({ product, changeQuantity, removeItem }) => {
             className="cart-item d-flex align-items-center mb-4 p-3 rounded"
             style={{
                 background: 'linear-gradient(135deg, #ffffff 60%, #f0f7f0 100%)',
-                border: '1px solid #e0e0e0',
+                border: 'none',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
                 transition: 'all 0.3s ease',
                 borderRadius: '12px',

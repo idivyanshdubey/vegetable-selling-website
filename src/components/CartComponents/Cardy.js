@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import './Cardy.css';
 
-const Cardy = ({ data, addToCart }) => {
+const Cardy = ({ data, addToCart, addToWishlist }) => {
   const [isHovered, setIsHovered] = useState(false);
   
   const handleAddToCart = () => {
     addToCart(data);
+  };
+
+  const handleAddToWishlist = () => {
+    addToWishlist(data);
   };
 
   return (
@@ -33,6 +37,12 @@ const Cardy = ({ data, addToCart }) => {
                 onClick={handleAddToCart}
               >
                 Quick Add
+              </button>
+              <button
+                className="cardy-wishlist-btn"
+                onClick={handleAddToWishlist}
+              >
+                <i className="fas fa-heart"></i>
               </button>
             </div>
           )}

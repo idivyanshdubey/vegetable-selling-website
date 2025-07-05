@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './About.css';
 import Footer from '../components/Footer.js';
-import { Link } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -119,7 +120,7 @@ const About = () => {
     <div className="about-page">
       <nav className="navbar navbar-expand-lg sticky-top navbar-dark nav2">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <span className="logo-text">
               OrgoMart
               <span className="logo-image"><i className="fas fa-seedling fa-sm" /></span>
@@ -138,29 +139,35 @@ const About = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto">
-              <li className="nav-item"><a className="nav-link" aria-current="page" href="/">Home</a></li>
-              <li className="nav-item"><a className="nav-link active" href="./aboutUs">About Us</a></li>
-              <li className="nav-item"><a className="nav-link" href="./card">Products</a></li>
-              <li className="nav-item"><a className="nav-link" href="./contact">Contact</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</a></li>
+              <li className="nav-item"><a className="nav-link active" onClick={() => navigate('/aboutUs')} style={{ cursor: 'pointer' }}>About Us</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={() => navigate('/card')} style={{ cursor: 'pointer' }}>Products</a></li>
+              <li className="nav-item"><a className="nav-link" onClick={() => navigate('/contact')} style={{ cursor: 'pointer' }}>Contact</a></li>
             </ul>
             <form className="d-flex mx-auto">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-light" type="submit">Search</button>
             </form>
             <ul className="navbar-nav mx-right">
-              <li className="nav-item dropdown me-2">
-                <a className="nav-link" href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className="nav-item me-2">
+                <a
+                  className="nav-link"
+                  onClick={() => navigate("/myprofile")}
+                  style={{ cursor: "pointer" }}
+                >
                   <i className="fas fa-user fa-lg" />
                 </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a className="dropdown-item" href="">My Profile</a></li>
-                  <li><a className="dropdown-item" href="#">Orders</a></li>
-                  <li><a className="dropdown-item" href="#">Coupons</a></li>
-                  <li><a className="dropdown-item" href="#">Logout</a></li>
-                </ul>
               </li>
-              <li className="nav-item me-2"><a className="nav-link" href="#"><i className="fas fa-heart fa-lg" /></a></li>
-              <li className="nav-item me-2"><a className="nav-link" href="#"><i className="fas fa-shopping-cart fa-lg" /></a></li>
+              <li className="nav-item me-2">
+                <a className="nav-link" onClick={() => navigate('/wishlist')} style={{ cursor: 'pointer' }}>
+                  <i className="fas fa-heart fa-lg" />
+                </a>
+              </li>
+              <li className="nav-item me-2">
+                <a className="nav-link" onClick={() => navigate('/checkout')} style={{ cursor: 'pointer' }}>
+                  <i className="fas fa-shopping-cart fa-lg" />
+                </a>
+              </li>
             </ul>
           </div>
         </div>
